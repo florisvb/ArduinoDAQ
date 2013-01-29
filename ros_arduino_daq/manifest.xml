@@ -1,0 +1,14 @@
+<package>
+  <description brief="ros_arduino_daq">
+
+     ros_arduino_daq
+
+  </description>
+  <author>Floris van Breugel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/ros_arduino_daq</url>
+
+</package>
+
+
