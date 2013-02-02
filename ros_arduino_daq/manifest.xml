@@ -8,7 +8,9 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/ros_arduino_daq</url>
-
+  <depend package="std_msgs"/>
+  <depend package="rospy"/>
+  
 </package>
 
 
