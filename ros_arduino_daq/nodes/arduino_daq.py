@@ -25,7 +25,7 @@ class Arduino_DAQ(serial.Serial):
         
         subscriber_name = topic_name + '_control'
         self.subscriber = rospy.Subscriber(subscriber_name,Int32,self.subscriber_callback)
-        self.publisher = rospy.Publisher(topic_name, Float32)
+        self.publisher = rospy.Publisher(topic_name, Int32)
         
         print 'ready to stream!'
         while not rospy.is_shutdown():
