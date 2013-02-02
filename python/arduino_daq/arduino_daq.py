@@ -3,9 +3,6 @@ import numpy as np
 import pickle
 import time
 
-import re
-import subprocess
-
 class Arduino_DAQ(serial.Serial):
     def __init__ (self, **kwargs):
         super(Arduino_DAQ,self).__init__(**kwargs)
