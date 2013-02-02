@@ -6,36 +6,6 @@ import time
 import re
 import subprocess
 
-def find_port_from_serial_number(s):
-
-    df = subprocess.check_output("lsusb -vvv", shell=True)
-    device_strings = df.split('\n\n')
-    
-    devices = []
-    
-    device_header_pattern_tagged = re.compile("Bus\s+(?P<bus>\d+)\s+Device\s+(?P<device>\d+).+ID\s(?P<id>\w+:\w+)\s(?P<tag>.+)$", re.I)
-    device_header_pattern_untagged = re.compile("Bus\s+(?P<bus>\d+)\s+Device\s+(?P<device>\d+).+ID\s(?P<id>\w+:\w+)$", re.I)
-    for device_string in device_strings:
-        device_string_lines = device_string.split('\n')
-        for line in device_string_lines:
-            info = device_header_pattern_tagged.match(line.strip())
-            if info is None:
-                info = device_header_pattern_untagged.match(line.strip())
-            if info:
-                dinfo = info.groupdict()
-                dinfo['device'] = '/dev/bus/usb/%s/%s' % (dinfo.pop('bus'), dinfo.pop('device'))
-            elif 'iSerial' in line:
-                info = (line.strip()).split(' ')
-                serial = info[-1]
-                dinfo.setdefault('serial', serial)
-        devices.append(dinfo)
-                
-        
-    
-    return devices
-
-
-
 class Arduino_DAQ(serial.Serial):
     def __init__ (self, **kwargs):
         super(Arduino_DAQ,self).__init__(**kwargs)
