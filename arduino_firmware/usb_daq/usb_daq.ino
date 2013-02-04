@@ -24,6 +24,7 @@ long time_to_stream_for = 100;
 long data = 0;
 long last_data = 0;
 long stream_method = 1;
+long streaming_delay = 0;
 
 void setup()
 {
@@ -42,6 +43,7 @@ void setup()
   data = 0;
   last_data = 0;
   stream_method = 1;
+  streaming_delay = 0;
 
 }
 
@@ -79,6 +81,9 @@ void loop()
     
     if (stream_method == 2) {
       Serial << analogRead(data_pin) << endl;
+      if (streaming_delay > 0) {
+        delayMicroseconds(streaming_delay);
+      }
     }
    
   }
@@ -94,6 +99,7 @@ void perform_action(long action, long value) {
     case 2: turn_off_streaming(); break;
     case 3: return_analog_value(value); break;
     case 100: set_streaming_method(value); break;
+    case 101: set_streaming_delay(value); break;
     default: return;
   }
 }
@@ -109,6 +115,10 @@ void turn_on_streaming(long value) {
 void turn_off_streaming() {
   stream_data = 0;
   Serial << 0 << "," << -10000 << endl;
+}
+
+void set_streaming_delay(long value) {
+  streaming_delay = value;
 }
   
 void return_analog_value(long value) {
