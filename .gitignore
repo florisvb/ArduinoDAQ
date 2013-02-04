@@ -1,3 +1,5 @@
 *~
 *.pyc
 *build
+/ros_arduino_daq/src
+/ros_arduino_daq/srv_gen
